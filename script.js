@@ -1,0 +1,7 @@
+const menuBtn=document.querySelector('.menu-btn');const nav=document.querySelector('.nav');menuBtn?.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuBtn.setAttribute('aria-expanded',open)});document.querySelectorAll('.nav a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));document.getElementById('year').textContent=new Date().getFullYear();
+const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}}),{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+const modal=document.getElementById('modal'),modalImg=document.getElementById('modalImg'),modalTitle=document.getElementById('modalTitle');document.querySelectorAll('button.gallery-item').forEach(b=>b.addEventListener('click',()=>{modalImg.src=b.dataset.img;modalTitle.textContent=b.dataset.title;modal.classList.add('open');modal.setAttribute('aria-hidden','false')}));function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true')}document.querySelector('.modal-close').addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// Duplicate testimonial cards once to create a seamless right-to-left loop.
+const testimonialTrack=document.querySelector('.testimonial-track');
+if(testimonialTrack){testimonialTrack.innerHTML+=testimonialTrack.innerHTML;}
